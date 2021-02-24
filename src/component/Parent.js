@@ -15,7 +15,7 @@ class Parent extends Component {
   }
 
   callbackFunction = (todoData) => {
-    const newList = this.state.list.concat({ todoData });
+    const newList = this.state.list.concat(todoData);
     this.setState({
       list: newList,
     });
