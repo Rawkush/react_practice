@@ -31,15 +31,17 @@ class AddTodo extends Component {
 
   addToList() {
     //  alert(this.state.notes);
+    this.index = this.props.count;
     const todoData = {
+      index: this.index,
       whatToDo: this.state.whatToDo,
       place: this.state.place,
       time: this.state.time,
       notes: this.state.notes,
     };
+    this.props.addToDoList(todoData);
 
     //   const newList = this.state.list.concat({ todoData });
-    this.props.parentCallBack(todoData);
     // this.setState({
     //   list: newList,
     // });

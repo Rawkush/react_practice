@@ -1,16 +1,40 @@
 import React, { Component } from "react";
+import { useHistory } from "react-router-dom";
 class ListToDo extends Component {
   constructor(props) {
     super(props);
+    this.modifyData = this.modifyData.bind(this);
+    this.deleteData = this.deleteData.bind(this);
     this.state = {
       list: [
-        { whatToDo: "stuff", place: "delhi", time: "12", notes: "notes" },
-        { whatToDo: "stuff", place: "delhi", time: "12", notes: "notes" },
+        {
+          whatToDo: "stuff",
+          place: "delhi",
+          time: "12",
+          notes: "notes",
+        },
+        {
+          whatToDo: "stuff",
+          place: "delhi",
+          time: "12",
+          notes: "notes",
+        },
       ],
     };
   }
 
-  // to access this.props.l
+  modifyData(index) {
+    console.log("id for modify is ", index);
+    alert("need to redirect to add page");
+    //  const history = useHistory();
+    //  history.push("/modify");
+    // this.props.history.push("/modify");
+  }
+
+  deleteData(index) {
+    console.log("id for delete is ", index);
+    this.props.deleteData(index);
+  }
 
   render() {
     return (
@@ -21,7 +45,7 @@ class ListToDo extends Component {
               //list
               this.props.list.map((data) => {
                 return (
-                  <div>
+                  <div key={data.index}>
                     <div className="dataContainer">
                       <div>
                         <span>What to do </span> <span> {data.whatToDo}</span>
@@ -36,10 +60,18 @@ class ListToDo extends Component {
                         <span>time</span> <span> {data.time}</span>
                       </div>
                     </div>
-                    <button type="buttom" className="btn btn-primary">
+                    <button
+                      type="buttom"
+                      onClick={() => this.modifyData(data.index)}
+                      className="btn btn-primary"
+                    >
                       modify data
                     </button>
-                    <button type="button" className="btn btn-danger">
+                    <button
+                      type="button"
+                      onClick={() => this.deleteData(data.index)}
+                      className="btn btn-danger"
+                    >
                       delete
                     </button>
                   </div>
