@@ -37,12 +37,13 @@ class AddTodo extends Component {
       time: this.state.time,
       notes: this.state.notes,
     };
-    const newList = this.state.list.concat({ todoData });
 
-    this.setState({
-      list: newList,
-    });
-    console.log(this.state.list);
+    //   const newList = this.state.list.concat({ todoData });
+    this.props.parentCallBack(todoData);
+    // this.setState({
+    //   list: newList,
+    // });
+    // console.log(this.state.list);
   }
 
   render() {

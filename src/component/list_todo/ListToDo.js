@@ -19,7 +19,7 @@ class ListToDo extends Component {
           <div className="data">
             {
               //list
-              this.state.list.map((data) => {
+              this.props.list.map((data) => {
                 return (
                   <div>
                     <div className="dataContainer">
