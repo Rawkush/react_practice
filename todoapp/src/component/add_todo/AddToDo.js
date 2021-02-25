@@ -1,52 +1,76 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 class AddTodo extends Component {
   constructor(props) {
     super(props);
-    this.addToList = this.addToList.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
     this.state = {
-      count: 0,
+      count: 0, //* index of the item
       whatToDo: "",
       notes: "",
       time: "",
       place: "",
-      data: {},
       list: [],
+      modifyIndex: -1,
     };
   }
 
-  handleSubmit(event) {
-    this.addToList();
-    event.preventDefault();
-  }
+  componentDidMount = () => {
+    if (this.props.location.data !== undefined) {
+      this.setState(
+        {
+          list: this.props.location.data,
+          modifyIndex: this.props.location.index,
+        },
+        () => {
+          console.log("add: state after save", this.state.list);
+        }
+      );
+    } else {
+      console.log("add: undefined", this.props.history.data);
+    }
+  };
 
-  handleChange(event) {
+  handleSubmit = (event) => {
+    if (this.state.modifyIndex !== -1) {
+      this.addToList(this.state.modifyIndex);
+    } else {
+      this.addToList(this.state.count);
+    }
+    event.preventDefault();
+  };
+
+  handleChange = (event) => {
     const name = event.target.name;
     this.setState({
       [name]: event.target.value,
     });
-  }
+  };
 
-  addToList() {
-    //  alert(this.state.notes);
-    this.index = this.props.count;
-    const todoData = {
-      index: this.index,
+  addToList = (myIndex) => {
+    const newList = this.state.list.concat({
+      index: myIndex,
       whatToDo: this.state.whatToDo,
       place: this.state.place,
       time: this.state.time,
       notes: this.state.notes,
-    };
-    this.props.addToDoList(todoData);
+    });
+    this.setState(
+      {
+        list: newList,
+        count: this.state.count + 1,
+        modifyIndex: -1,
+      },
+      () => {
+        console.log("add: data added");
+      }
+    );
+  };
 
-    //   const newList = this.state.list.concat({ todoData });
-    // this.setState({
-    //   list: newList,
-    // });
-    // console.log(this.state.list);
-  }
+  gotoListPage = () => {
+    this.props.history.push({
+      pathname: "/list",
+      data: this.state.list,
+    });
+  };
 
   render() {
     return (
@@ -101,11 +125,14 @@ class AddTodo extends Component {
                 ADD
               </button>
             </form>
-            <Link to="/list">
-              <button type="button" className="btn btn-danger">
-                See List
-              </button>
-            </Link>
+
+            <button
+              type="button"
+              onClick={this.gotoListPage}
+              className="btn btn-danger"
+            >
+              See List
+            </button>
           </div>
         </div>
       </div>
