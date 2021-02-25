@@ -5,9 +5,12 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 class Parent extends Component {
   constructor(props) {
     super(props);
+
     this.addDataToList = this.addDataToList.bind(this);
     this.modifyItemInList = this.modifyItemInList.bind(this);
     this.deleteItemFromList = this.deleteItemFromList.bind(this);
+
+    this.fun = this.fun.bind(this);
     this.state = {
       count: 2,
       modifyIndex: -1,
@@ -61,29 +64,44 @@ class Parent extends Component {
     console.log(this.state.list);
   };
 
+  fun() {
+    this.props.history.push({
+      pathname: "/list",
+      data: this.state.list,
+    });
+  }
+
   render() {
     return (
-      <Router>
-        <div className="App">
-          <Switch>
-            <Route path="/list">
-              <ListToDo
-                list={this.state.list}
-                count={this.state.count}
-                deleteData={this.deleteItemFromList}
-                modifyData={this.modifyItemInList}
-              />
-            </Route>
-            <Route path="/">
-              <AddTodo
-                count={this.state.count}
-                list={this.state.list}
-                addToDoList={this.addDataToList}
-              />
-            </Route>
-          </Switch>
-        </div>
-      </Router>
+      // <Router>
+      //   <div className="App">
+      //     <Switch>
+      //       <Route path="/list">
+      //         <ListToDo
+      //           list={this.state.list}
+      //           count={this.state.count}
+      //           deleteData={this.deleteItemFromList}
+      //           modifyData={this.modifyItemInList}
+      //         />
+      //       </Route>
+      //       <Route path="/">
+      //         <AddTodo
+      //           count={this.state.count}
+      //           list={this.state.list}
+      //           addToDoList={this.addDataToList}
+      //         />
+      //       </Route>
+      //     </Switch>
+      //   </div>
+      // </Router>
+
+      <div>
+        <h1>hello</h1>
+        <button type="button" onClick={this.fun}>
+          {" "}
+          submit{" "}
+        </button>
+      </div>
     );
   }
 }

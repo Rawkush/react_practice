@@ -20,7 +20,22 @@ class ListToDo extends Component {
           notes: "notes",
         },
       ],
+
+      recievedProps: "",
     };
+
+    console.log(this.props);
+  }
+
+  componentDidMount() {
+    this.setState(
+      {
+        recievedProps: this.props.location.data,
+      },
+      () => {
+        console.log(this.state.recievedProps);
+      }
+    );
   }
 
   modifyData(index) {
@@ -38,48 +53,54 @@ class ListToDo extends Component {
 
   render() {
     return (
-      <div className="parent">
-        <div className="container">
-          <div className="data">
-            {
-              //list
-              this.props.list.map((data) => {
-                return (
-                  <div key={data.index}>
-                    <div className="dataContainer">
-                      <div>
-                        <span>What to do </span> <span> {data.whatToDo}</span>
-                      </div>
-                      <div>
-                        <span>place</span> <span> {data.place}</span>
-                      </div>
-                      <div>
-                        <span>notes</span> <span> {data.notes}</span>
-                      </div>
-                      <div>
-                        <span>time</span> <span> {data.time}</span>
-                      </div>
-                    </div>
-                    <button
-                      type="buttom"
-                      onClick={() => this.modifyData(data.index)}
-                      className="btn btn-primary"
-                    >
-                      modify data
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => this.deleteData(data.index)}
-                      className="btn btn-danger"
-                    >
-                      delete
-                    </button>
-                  </div>
-                );
-              })
-            }
-          </div>
-          <div className="controller"></div>
+      // <div className="parent">
+      //   <div className="container">
+      //     <div className="data">
+      //       {
+      //         //list
+      //         this.props.list.map((data) => {
+      //           return (
+      //             <div key={data.index}>
+      //               <div className="dataContainer">
+      //                 <div>
+      //                   <span>What to do </span> <span> {data.whatToDo}</span>
+      //                 </div>
+      //                 <div>
+      //                   <span>place</span> <span> {data.place}</span>
+      //                 </div>
+      //                 <div>
+      //                   <span>notes</span> <span> {data.notes}</span>
+      //                 </div>
+      //                 <div>
+      //                   <span>time</span> <span> {data.time}</span>
+      //                 </div>
+      //               </div>
+      //               <button
+      //                 type="buttom"
+      //                 onClick={() => this.modifyData(data.index)}
+      //                 className="btn btn-primary"
+      //               >
+      //                 modify data
+      //               </button>
+      //               <button
+      //                 type="button"
+      //                 onClick={() => this.deleteData(data.index)}
+      //                 className="btn btn-danger"
+      //               >
+      //                 delete
+      //               </button>
+      //             </div>
+      //           );
+      //         })
+      //       }
+      //     </div>
+      //     <div className="controller"></div>
+      //   </div>
+      // </div>
+
+      <div>
+        <div>
+          <h1>hello child</h1>
         </div>
       </div>
     );
