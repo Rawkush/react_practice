@@ -45,6 +45,7 @@ class AddTodo extends Component {
     });
   };
 
+  //TODO:
   addToList = (myIndex) => {
     const newList = this.state.list.concat({
       index: myIndex,

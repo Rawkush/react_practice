@@ -12,7 +12,6 @@ class ListToDo extends Component {
 
   componentDidMount = () => {
     //? append list if it
-
     this.setState(
       {
         list: this.props.location.data,
@@ -22,6 +21,8 @@ class ListToDo extends Component {
       }
     );
   };
+
+  //TODO: if list is blank need to show something in the page that its blank
 
   modifyData = (myIndex) => {
     console.log("list: id for modify is ", myIndex);
